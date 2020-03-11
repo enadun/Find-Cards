@@ -139,7 +139,7 @@ class HomeViewController: UIViewController {
     }
 }
 
-extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension HomeViewController: UICollectionViewDataSource {
     //Data source methods
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         Config.NO_OF_PAIRS * 2
@@ -152,7 +152,9 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         }
         return cell
     }
-    
+}
+
+extension HomeViewController: UICollectionViewDelegate {
     //Delegate methods
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? CardViewCell {
@@ -169,7 +171,10 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             }
         }
     }
-    
+}
+
+extension HomeViewController: UICollectionViewDelegateFlowLayout {
+    //Flow layout delegate methods
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let numberOfItemsPerRow:CGFloat = 3.0
         let spacingBetweenCells:CGFloat = 8.0
@@ -177,15 +182,10 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         //Amount of total spacing in a row
         let totalSpacing = (2 * spacing) + ((numberOfItemsPerRow - 1) * spacingBetweenCells)
         
-        if let collection = contentView?.collectionView{
-            let width = (collection.bounds.width - totalSpacing) / numberOfItemsPerRow
-            return CGSize(width: width, height: width * 1.5)
-        }else{
-            return CGSize(width: 0, height: 0)
-        }
+        let width = (collectionView.bounds.width - totalSpacing) / numberOfItemsPerRow
+        return CGSize(width: width, height: width * 1.5)
     }
     
-
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         8.0
     }
@@ -193,6 +193,5 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         8.0
     }
-    
 }
 
