@@ -11,7 +11,7 @@ import UIKit
 class HomeViewController: UIViewController {
     
     private var contentView: HomeContentView?
-    private let spacing:CGFloat = 20.0
+    private let spacing:CGFloat = 8.0
     
     private var cards: [Card] = []
     private var flipCardsIndexPath: [IndexPath] = []
@@ -53,7 +53,7 @@ class HomeViewController: UIViewController {
         counterLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 30))
         if let counterLabel = counterLabel {
             counterLabel.textAlignment = .left
-            counterLabel.textColor = .black
+            counterLabel.textColor = .label
             counterLabel.font = UIFont(name: "Helvetica", size: 18)
             navigationItem.rightBarButtonItem = UIBarButtonItem(customView: counterLabel)
             setStepLabel()
@@ -156,31 +156,43 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     //Delegate methods
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? CardViewCell {
-            stepsCount += 1
             collectionView.isUserInteractionEnabled = false
             cell.flipCard { [weak self] card in
-                if let card = card {
-                    self?.cards[indexPath.row] = card
-                    self?.flipCardsIndexPath.append(indexPath)
-                    self?.hasMached()
+                guard let card = card else {
+                    collectionView.isUserInteractionEnabled = true
+                    return
                 }
+                self?.stepsCount += 1
+                self?.cards[indexPath.row] = card
+                self?.flipCardsIndexPath.append(indexPath)
+                self?.hasMached()
             }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let numberOfItemsPerRow:CGFloat = 3.0
-        let spacingBetweenCells:CGFloat = 0.0
+        let spacingBetweenCells:CGFloat = 8.0
         
         //Amount of total spacing in a row
         let totalSpacing = (2 * spacing) + ((numberOfItemsPerRow - 1) * spacingBetweenCells)
         
         if let collection = contentView?.collectionView{
-            let width = (collection.bounds.width - totalSpacing)/numberOfItemsPerRow
+            let width = (collection.bounds.width - totalSpacing) / numberOfItemsPerRow
             return CGSize(width: width, height: width * 1.5)
         }else{
             return CGSize(width: 0, height: 0)
         }
     }
+    
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        8.0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        8.0
+    }
+    
 }
 
