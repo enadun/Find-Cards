@@ -6,4 +6,8 @@
 //  Copyright © 2020 nadun.eranga.baduge. All rights reserved.
 //
 
-import Foundation
+struct Card {
+    var hasPaired: Bool = false
+    var isFrontView: Bool = true
+    let number: Int
+}

@@ -6,4 +6,6 @@
 //  Copyright © 2020 nadun.eranga.baduge. All rights reserved.
 //
 
-import Foundation
+struct Config {
+    static let NO_OF_PAIRS: Int = 3
+}

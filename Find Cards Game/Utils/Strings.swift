@@ -6,4 +6,11 @@
 //  Copyright © 2020 nadun.eranga.baduge. All rights reserved.
 //
 
-import Foundation
+struct Strings {
+    static let APP_NAME = "Find Cards"
+    static let ALERT_TITLE = "Contratulations!"
+    static let ALERT_MESSAGE = "You win this game by %@ steps!"
+    static let TRY_AGAIN_BTN = "Tray another round"
+    static let RE_START = "Restart"
+    static let STEPS_COUNT = "Steps: %@"
+}
