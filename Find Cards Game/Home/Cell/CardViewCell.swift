@@ -41,8 +41,11 @@ class CardViewCell: UICollectionViewCell {
     }
     
     func flipCard(callbak: @escaping(_ card: Card?)->Void) {
-        if let frontView = frontView, let backView = backView, let hasPaired = card?.hasPaired {
-            if hasPaired { return }
+        if card?.hasPaired == true || card?.isFrontView == false {
+            callbak(nil)
+            return
+        }
+        if let frontView = frontView, let backView = backView {
             flipCard(fromView: frontView, toView: backView, with: callbak, option: .transitionFlipFromRight)
             card?.isFrontView = false
         }
@@ -59,7 +62,6 @@ class CardViewCell: UICollectionViewCell {
     }
     
     private func flipCard(fromView: UIView, toView: UIView, with callbak: @escaping(_ card: Card?)->Void, option: UIView.AnimationOptions) {
-        
         UIView.transition(with: self, duration: 0.5, options: option, animations: {
             fromView.isHidden = true
             toView.isHidden = false

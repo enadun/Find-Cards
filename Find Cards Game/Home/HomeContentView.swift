@@ -42,7 +42,7 @@ class HomeContentView: UIView {
                                           collectionViewLayout: UICollectionViewFlowLayout())
         collectionView?.backgroundColor = .none
         let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout
-        let margin: CGFloat = 10.0
+        let margin: CGFloat = 8.0
         layout?.sectionInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
         layout?.invalidateLayout()
         if let collectionView = collectionView {
