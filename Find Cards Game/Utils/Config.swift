@@ -7,5 +7,5 @@
 //
 
 struct Config {
-    static let NO_OF_PAIRS: Int = 20
+    static let NO_OF_PAIRS: Int = 6
 }

@@ -70,7 +70,7 @@ class HomeViewController: UIViewController {
     private func reset() {
         let pair1 = getUniqueRandoms(numberOfRandoms: Config.NO_OF_PAIRS)
         let pair2 = getUniqueRandoms(numberOfRandoms: Config.NO_OF_PAIRS)
-        let pairs = pair1 + pair2
+        let pairs = (pair1 + pair2).shuffled()
         cards = pairs.map { Card(number: $0) }
         flipCardsIndexPath = []
         
