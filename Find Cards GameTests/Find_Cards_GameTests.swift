@@ -19,9 +19,17 @@ class Find_Cards_GameTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testRadomizor() {
+        let maximumNumber = 10
+        //Check is it generating all the numbers
+        var uniqueNumbers: Set<Int> = []
+        repeat {
+            // Range startNumber ..< maximumNumber
+            let randomNumber = getRandomNumber(startNumber: 0, maximumNumber: maximumNumber)
+            uniqueNumbers.insert(randomNumber)
+        } while(uniqueNumbers.count < maximumNumber)
+        print(uniqueNumbers)
+        XCTAssertTrue(true)
     }
 
     func testPerformanceExample() {
