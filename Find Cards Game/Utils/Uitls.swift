@@ -30,10 +30,16 @@ func fillToSafeArea(childView: UIView, in parentView: UIView) {
     NSLayoutConstraint.activate(constraints)
 }
 
-func getUniqueRandoms(numberOfRandoms: Int) -> [Int] {
+func getUniqueRandoms(numberOfRandoms: Int, startNumber: Int, maximumNumber: Int) -> [Int] {
     var uniqueNumbers = Set<Int>()
     while uniqueNumbers.count < numberOfRandoms {
-        uniqueNumbers.insert(Int(arc4random_uniform(UInt32(numberOfRandoms))) + 1)
+        uniqueNumbers.insert(Int(arc4random_uniform(UInt32(maximumNumber + 1 - startNumber))) + startNumber)
     }
     return uniqueNumbers.shuffled()
+}
+
+func getRandomPairNumbersforCards() -> [Int] {
+    let pair1 = getUniqueRandoms(numberOfRandoms: Config.NO_OF_PAIRS, startNumber: 1, maximumNumber: 100)
+    let pair2 = pair1.shuffled()
+    return (pair1 + pair2).shuffled()
 }
